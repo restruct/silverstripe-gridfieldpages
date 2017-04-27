@@ -5,24 +5,24 @@ class GridFieldPageHolder extends Page
 
     private static $allowed_children = array('*GridFieldPage');
     private static $default_child = "GridFieldPage";
-    
+
     private static $add_default_gridfield = true;
     private static $apply_sortable = true;
     private static $subpage_tab = "Root.Subpages";
     private static $gridfield_title = "Manage Subpages";
-    
-    public static function setAddDefaultGridField(Boolean $val)
+
+    public static function setAddDefaultGridField($val)
     {
         Deprecation::notice('1.0', 'setAddDefaultGridField is deprecated please use Config instead');
-        self::config()->update('add_default_gridfield', $val);
+        self::config()->update('add_default_gridfield', (bool) $val);
     }
-     
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        
+
         $PageTab = Config::inst()->get($this->owner->className, 'subpage_tab');
-        
+
         // GridFieldPage
         if (Config::inst()->get($this->owner->className, 'add_default_gridfield')) {
             $gridFieldConfig = GridFieldConfig::create()->addComponents(
@@ -50,7 +50,7 @@ class GridFieldPageHolder extends Page
                 'getStatus' => 'Status',
                 //'LastEdited' => 'Changed',
             ));
-            
+
             // include both live and stage versions of pages
             // use gridfield as normal
             $gridField = new GridField("Subpages",
@@ -59,16 +59,16 @@ class GridFieldPageHolder extends Page
                     //SiteTree::get()->filter('ParentID', $this->ID),
                     $this->AllChildrenIncludingDeleted(),
                     $gridFieldConfig);
-            
+
             $gridField->setModelClass($this->defaultChild());
-            
+
             $fields->addFieldToTab($PageTab, $gridField);
         }
-        
+
         return $fields;
     }
-    
-    // @TODO: A page still needs to be published for the sortorder to be updated, 
+
+    // @TODO: A page still needs to be published for the sortorder to be updated,
     // we need some kind of warning/info to inform CMS users about this
 //	public function SortedChildren(){
 //		//return DataObject::get($this->defaultChild(), 'ParentID = '.$this->ID);
@@ -90,7 +90,7 @@ class GridFieldPageHolder extends Page
 //		return BlogGridPage::get()->filter('ParentID', $this->ID)->sort('Date DESC')->limit($amount);
 //	}
 }
- 
+
 class GridFieldPageHolder_Controller extends Page_Controller
 {
 }
