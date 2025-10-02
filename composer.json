@@ -1,11 +1,12 @@
 {
-    "name": "micschk/silverstripe-gridfieldpages",
+    "name": "restruct/silverstripe-gridfieldpages",
     "description": "Base Page & Holder classes for managing SiteTree items in a Gridfield instead of via SiteTree",
     "type": "silverstripe-vendormodule",
     "keywords": ["silverstripe", "sitetree", "gridfield"],
     "authors": [
     {
-        "name": "micschk"
+        "name": "Restruct",
+        "email": "dev@restruct.nl"
     }],
     "require": {
         "silverstripe/vendor-plugin": "^1",
