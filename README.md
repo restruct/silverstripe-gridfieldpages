@@ -1,6 +1,8 @@
 Manage pages from a gridfield instead of the sitetree
 =====================================================
 
+# ARCHIVED (add issue to some Restruct module to let me know if you still need this module)
+
 This module tackles the issue of a cluttered SiteTree by managing pages from a gridfield. It can easily handle thousands of subpages (production-tested with 65.000 pages under one parent).
 
 This module is meant as base classes, it can be used on its own but usually you will want to subclass in order to add filtering/sorting, etc. An example module subclassing this module is Newsgrid (filterable newsitems managed from a gridfield).
