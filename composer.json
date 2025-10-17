@@ -11,7 +11,7 @@
     "require": {
         "silverstripe/vendor-plugin": "^1",
         "silverstripe/cms": "^4",
-		"micschk/silverstripe-gridfieldsitetreebuttons": "^2"
+		"restruct/silverstripe-gridfieldsitetreebuttons": "^2"
     },
     "extra": {
         "expose": [

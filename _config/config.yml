@@ -3,7 +3,7 @@ Name: gridfieldpages
 ---
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
-    - 'micschk/silverstripe-gridfieldpages:client/css/gridfieldpages.css'
+    - 'restruct/silverstripe-gridfieldpages:client/css/gridfieldpages.css'
 
 #Restruct\Silverstripe\GridFieldPages\GridFieldPageHolder:
 #  hide_from_cms_tree:

@@ -17,7 +17,7 @@ extends GridFieldOrderableRows
     {
         parent::getHTMLFragments($field);
 
-        Requirements::javascript('micschk/silverstripe-gridfieldpages:client/js/gridfieldpages.js');
+        Requirements::javascript('restruct/silverstripe-gridfieldpages:client/js/gridfieldpages.js');
 
         /**
          * We call CMSMain savetreenode to update just the position of the reordered page without marking all siblings as changed.

@@ -19,7 +19,7 @@ This module is meant as base classes, it can be used on its own but usually you 
 *These will get auto-installed when using composer:*
 
 * SilverStripe CMS 4.0 or newer (3.x see 1.x tags)
-* [silverstripe-gridfieldsitetreebuttons to manage SiteTree items in a gridfield](https://github.com/micschk/silverstripe-gridfieldsitetreebuttons)
+* [silverstripe-gridfieldsitetreebuttons to manage SiteTree items in a gridfield](https://github.com/restruct/silverstripe-gridfieldsitetreebuttons)
 
 *Optional, for drag & drop sorting (suggested, not auto-installed by composer):*
 
@@ -29,7 +29,7 @@ This module is meant as base classes, it can be used on its own but usually you 
 ## Installation
 
 ```
-composer require micschk/silverstripe-gridfieldpages dev-master
+composer require restruct/silverstripe-gridfieldpages dev-master
 ```
 
 ## Optional: Drag & Drop Sorting
@@ -52,4 +52,4 @@ GridFieldPageHolder:
 ## Recommended
 
 Manage newsitems from a gridfield, with embargo & expire (auto-publishing) functionality
-* [silverstripe-newsgrid](https://github.com/micschk/silverstripe-newsgrid)
+* [silverstripe-newsgrid](https://github.com/restruct/silverstripe-newsgrid)

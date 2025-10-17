@@ -8,30 +8,21 @@
 
 namespace Restruct\Silverstripe\GridFieldPages;
 
-use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\Dev\Deprecation;
+use SilverStripe\Core\Extension;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldConfig;
-use SilverStripe\Forms\GridField\GridFieldEditButton;
-use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use Restruct\Silverstripe\SiteTreeButtons\GridFieldAddNewSiteTreeItemButton;
-use SilverStripe\Forms\GridField\GridFieldSortableHeader;
 use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldPaginator;
 use Restruct\Silverstripe\SiteTreeButtons\GridFieldEditSiteTreeItemButton;
-use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataObject;
-use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
-use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\GridField\GridField;
-use Restruct\Silverstripe\GridFieldPages\GridFieldPage;
-use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
 
 class GridFieldPageHolderExtension
-extends DataExtension
+extends Extension
 {
     // defaults, configurable via config
 //    private static $allowed_children = [
@@ -47,7 +38,7 @@ extends DataExtension
     {
 //        die('called');
         // GridFieldPage
-        if($this->owner->config()->get('add_default_gridfield')) {
+        if($this->getOwner()->config()->get('add_default_gridfield')) {
             $this->addPagesGridField($fields);
         }
     }
@@ -57,20 +48,20 @@ extends DataExtension
         $gridFieldConfig = GridFieldConfig::create()
             ->addComponents(
                 # new GridFieldToolbarHeader(),
-                new GridFieldButtonRow('before'),
+                GridFieldButtonRow::create('before'),
                 new GridFieldAddNewSiteTreeItemButton(),
                 # new GridFieldTitleHeader(),
                 # new GridFieldSortableHeader(),
-                new GridFieldFilterHeader(),
-                $dataColumns = new GridFieldDataColumns(),
-                new GridFieldPaginator(20),
+                GridFieldFilterHeader::create(),
+                $dataColumns = GridFieldDataColumns::create(),
+                GridFieldPaginator::create(20),
                 new GridFieldEditSiteTreeItemButton()
             );
 
         // Orderable is optional, as often pages may be sorted by other means
-        if($orderable===null) $orderable = $this->owner->config()->apply_sortable;
+        if($orderable===null) $orderable = $this->getOwner()->config()->apply_sortable;
         if ($orderable) {
-            $gridFieldConfig->addComponent(new GridFieldOrderablePages());
+            $gridFieldConfig->addComponent(GridFieldOrderablePages::create());
         }
 
         $dataColumns->setDisplayFields([
@@ -80,11 +71,11 @@ extends DataExtension
         ]);
 
         $gridField = GridField::create("Subpages",
-                Config::inst()->get($this->owner->className, 'gridfield_title'),
-                DataObject::get($this->owner->defaultChild(), 'ParentID = '.$this->owner->ID),
+                Config::inst()->get($this->getOwner()->className, 'gridfield_title'),
+                DataObject::get($this->getOwner()->defaultChild(), 'ParentID = '.$this->getOwner()->ID),
                 $gridFieldConfig
             )
-            ->setModelClass($this->owner->defaultChild());
+            ->setModelClass($this->getOwner()->defaultChild());
 
         $fields->addFieldToTab($tab, $gridField);
     }
